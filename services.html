@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Explore our comprehensive business services including strategic consulting, digital marketing, financial planning, and technology solutions.">
+    <title>Our Services | T_LABS</title>
+    <style>
+     * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+body {
+    line-height: 1.6;
+    color: #333;
+    transition: opacity 0.3s ease; /* Transition for fade-out effect */
+}
+
+body.fade-out {
+    opacity: 0; /* Fade-out effect */
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Header */
+header {
+    background-color: #2c3e50;
+    padding: 20px 0;
+    position: fixed;
+    width: 100%;
+    z-index: 100;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.logo {
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+}
+
+.nav-links li {
+    margin-left: 30px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: #3498db;
+}
+
+/* Hero Section */
+.hero {
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('background.jpg') center/cover no-repeat;
+    height: 50vh;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: white;
+    margin-bottom: 40px;
+}
+
+.hero-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.hero h1 {
+    font-size: 48px;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 20px;
+    margin-bottom: 30px;
+}
+
+/* Button Styles */
+.btn {
+    display: inline-block;
+    background-color: #3498db;
+    color: white;
+    padding: 12px 30px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: bold;
+    position: relative; /* For bubble effect */
+    overflow: hidden; /* For bubble effect */
+    transition: background-color 0.3s, color 0.3s; /* Transition for background and text color */
+}
+
+.btn::after {
+    content: '';
+    position: absolute;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    width: 300%;
+    height: 300%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    transition: transform 0.5s ease;
+    z-index: 0;
+}
+
+.btn:hover::after {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.btn:hover {
+    background-color: #2980b9; /* Change background color on hover */
+    color: #ffffff; /* Keep text color white on hover */
+}
+
+/* Sections */
+section {
+    padding: 80px 0;
+}
+
+section h2 {
+    font-size: 36px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+section h3 {
+    font-size: 24px;
+    margin-bottom: 15px;
+    color: #2c3e50;
+}
+
+section p {
+    margin-bottom: 20px;
+    font-size: 18px;
+}
+
+/* Services */
+.service-section {
+    padding: 60px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.service-section:last-child {
+    border-bottom: none;
+}
+
+.service-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: center;
+}
+
+.service-image {
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.service-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.service-details h3 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: #2c3e50;
+}
+
+.service-features {
+    margin: 20px 0;
+}
+
+.service-features li {
+    margin-bottom: 10px;
+    position: relative;
+    padding-left: 25px;
+}
+
+.service-features li:before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: #3498db;
+    font-weight: bold;
+}
+
+/* Process Section */
+.process-section {
+    background-color: #f9f9f9;
+    text-align: center;
+}
+
+.process-steps {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 50px;
+    flex-wrap: wrap;
+}
+
+.process-step {
+    flex: 1;
+    min-width: 200px;
+    padding: 0 20px;
+    position: relative;
+    margin-bottom: 30px;
+}
+
+.process-step:not(:last-child):after {
+    content: "→";
+    position: absolute;
+    right: -10px;
+    top: 40px;
+    font-size: 30px;
+    color: #3498db;
+}
+
+.step-number {
+    width: 80px;
+    height: 80px;
+    background-color: #3498db;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    font-weight: bold;
+    margin: 0 auto 20px;
+}
+
+/* Pricing Section */
+.pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.pricing-card {
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    overflow: hidden;
+    transition: transform 0.3s;
+}
+
+.pricing-card:hover {
+    transform: translateY(-10px);
+}
+
+.card-header {
+    background-color: #2c3e50;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+.card-header h3 {
+    color: white;
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+
+.price {
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.price span {
+    font-size: 16px;
+    font-weight: normal;
+}
+
+.card-body {
+    padding: 30px;
+}
+
+.feature-list {
+    list-style: none;
+    margin-bottom: 30px;
+}
+
+.feature-list li {
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.feature-list li:last-child {
+    border-bottom: none;
+}
+
+/* CTA Section */
+.cta-section {
+    background-color: #3498db;
+    color: white;
+    text-align: center;
+}
+
+/* FAQ Section */
+.faq-item {
+    margin-bottom: 20px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 20px;
+}
+
+.faq-question {
+    font-size: 20px;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+/* Footer */
+footer {
+    background-color: #2c3e50;
+    color: white;
+    padding: 40px 0;
+    text-align: center;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 30px;
+    text-align: left;
+    margin-bottom: 40px;
+}
+
+.footer-column h3 {
+    font-size: 20px;
+    margin-bottom: 20px;
+    color: #3498db;
+}
+
+.footer-column ul {
+    list-style: none;
+}
+
+.footer-column ul li {
+    margin-bottom: 10px;
+}
+
+.footer-column a {
+    color: #ecf0f1;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer-column a:hover {
+    color: #3498db;
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.social-links a {
+    display: inline-block;
+    margin: 0 10px;
+    color: white;
+    font-size: 24px;
+    transition: color 0.3s;
+}
+
+.social-links a:hover {
+    color: #3498db;
+}
+
+.copyright {
+    font-size: 14px;
+    color: #bdc3c7;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+    }
+
+    .hero h1 {
+        font-size: 36px;
+    }
+
+    .service-content {
+        grid-template-columns: 1fr;
+    }
+
+    .service-image {
+        order: -1;
+        margin-bottom: 20px;
+    }
+
+    .process-step:not(:last-child):after {
+        display: none;
+    }
+}
+    </style>
+    
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <a href="home.html" class="logo">Business Name</a>
+                <ul class="nav-links">
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="team.html">Our Team</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Our Services</h1>
+                <p>Comprehensive business solutions tailored to your unique needs</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <section class="service-section" id="consulting">
+            <div class="service-content">
+                <div class="service-details">
+                    <h3>Strategic Consulting</h3>
+                    <p>Our strategic consulting services help businesses identify opportunities, overcome challenges, and achieve sustainable growth. We work closely with your team to develop customized strategies that align with your goals and market dynamics.</p>
+                    <ul class="service-features">
+                        <li>Comprehensive business analysis and assessment</li>
+                        <li>Market research and competitive analysis</li>
+                        <li>Growth strategy development</li>
+                        <li>Operational efficiency optimization</li>
+                        <li>Performance measurement and KPI development</li>
+                    </ul>
+                    <a href="contact.html" class="btn">Request Consultation</a>
+                </div>
+                <div class="service-image">
+                    <img src="consulting.jpg" alt="Strategic Consulting Services">
+                </div>
+            </div>
+        </section>
+
+        <section class="service-section" id="marketing">
+            <div class="service-content">
+                <div class="service-image">
+                    <img src="marketing.jpg" alt="Digital Marketing Services">
+                </div>
+                <div class="service-details">
+                    <h3>Digital Marketing</h3>
+                    <p>Elevate your brand's online presence and reach your target audience through our comprehensive digital marketing services. We create data-driven strategies that generate leads, increase conversions, and build brand awareness.</p>
+                    <ul class="service-features">
+                        <li>Search Engine Optimization (SEO)</li>
+                        <li>Social Media Marketing and Management</li>
+                        <li>Content Marketing and Creation</li>
+                        <li>Pay-Per-Click (PPC) Advertising</li>
+                        <li>Email Marketing Campaigns</li>
+                        <li>Analytics and Performance Tracking</li>
+                    </ul>
+                    <a href="contact.html" class="btn">Get Marketing Plan</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="service-section" id="financial">
+            <div class="service-content">
+                <div class="service-details">
+                    <h3>Financial Planning</h3>
+                    <p>Secure your business's financial future with our expert financial planning services. We help you manage resources effectively, minimize risks, and make informed financial decisions that support your long-term business objectives.</p>
+                    <ul class="service-features">
+                        <li>Cash Flow Management and Forecasting</li>
+                        <li>Budget Development and Analysis</li>
+                        <li>Investment Strategy and Planning</li>
+                        <li>Risk Assessment and Management</li>
+                        <li>Tax Planning and Optimization</li>
+                        <li>Retirement and Succession Planning</li>
+                    </ul>
+                    <a href="contact.html" class="btn">Financial Consultation</a>
+                </div>
+                <div class="service-image">
+                    <img src="finance.jpg" alt="Financial Planning Services">
+                </div>
+            </div>
+        </section>
+
+        <section class="service-section" id="technology">
+            <div class="service-content">
+                <div class="service-image">
+                    <img src="technology.jpg" alt="Technology Solutions">
+                </div>
+                <div class="service-details">
+                    <h3>Technology Solutions</h3>
+                    <p>Leverage the latest technologies to streamline operations, enhance productivity, and gain competitive advantage. Our technology solutions are designed to address your specific business challenges and support your growth objectives.</p>
+                    <ul class="service-features">
+                        <li>Digital Transformation Strategy</li>
+                        <li>Software Selection and Implementation</li>
+                        <li>Cloud Computing Solutions</li>
+                        <li>Data Analytics and Business Intelligence</li>
+                        <li>Cybersecurity Assessment and Planning</li>
+                        <li>IT Infrastructure Optimization</li>
+                    </ul>
+                    <a href="contact.html" class="btn">Tech Consultation</a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <section class="process-section">
+        <div class="container">
+            <h2>Our Process</h2>
+            <p>We follow a systematic approach to deliver exceptional results for our clients</p>
+            
+            <div class="process-steps">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <h3>Discovery</h3>
+                    <p>We start by understanding your business, goals, challenges, and market position.</p>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <h3>Analysis</h3>
+                    <p>Our experts analyze your current situation and identify opportunities for improvement.</p>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <h3>Strategy</h3>
+                    <p>We develop a customized strategy tailored to your unique business needs.</p>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">4</div>
+                    <h3>Implementation</h3>
+                    <p>Our team works with you to implement the strategy and monitor progress.</p>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">5</div>
+                    <h3>Evaluation</h3>
+                    <p>We continuously evaluate results and refine strategies to ensure optimal performance.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <h2>Our Pricing Plans</h2>
+            <p>Flexible options designed to meet your business needs and budget</p>
+            
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <div class="card-header">
+                        <h3>Basic</h3>
+                        <div class="price">$999<span>/month</span></div>
+                    </div>
+                    <div class="card-body">
+                        <ul class="feature-list">
+                            <li>Strategic business assessment</li>
+                            <li>Monthly consulting sessions</li>
+                            <li>Basic SEO optimization</li>
+                            <li>Social media management (2 platforms)</li>
+                            <li>Quarterly financial review</li>
+                            <li>Email support</li>
+                        </ul>
+                        <a href="contact.html" class="btn" style="width: 100%;">Get Started</a>
+                    </div>
+                </div>
+                
+                <div class="pricing-card">
+                    <div class="card-header" style="background-color: #3498db;">
+                        <h3>Professional</h3>
+                        <div class="price">$2,499<span>/month</span></div>
+                    </div>
+                    <div class="card-body">
+                        <ul class="feature-list">
+                            <li>Comprehensive business strategy</li>
+                            <li>Weekly consulting sessions</li>
+                            <li>Advanced SEO and content marketing</li>
+                            <li>Social media management (5 platforms)</li>
+                            <li>Monthly financial planning</li>
+                            <li>Technology integration support</li>
+                            <li>Priority email and phone support</li>
+                        </ul>
+                        <a href="contact.html" class="btn" style="width: 100%; background-color: #3498db;">Get Started</a>
+                    </div>
+                </div>
+                
+                <div class="pricing-card">
+                    <div class="card-header">
+                        <h3>Enterprise</h3>
+                        <div class="price">Custom</div>
+                    </div>
+                    <div class="card-body">
+                        <ul class="feature-list">
+                            <li>Custom business strategy and implementation</li>
+                            <li>Unlimited consulting access</li>
+                            <li>Complete digital marketing suite</li>
+                            <li>Comprehensive financial management</li>
+                            <li>Full technology solution integration</li>
+                            <li>Dedicated account manager</li>
+                            <li>24/7 priority support</li>
+                        </ul>
+                        <a href="contact.html" class="btn" style="width: 100%;">Contact Us</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="container">
+            <h2>Ready to Transform Your Business?</h2>
+            <p>Schedule a free consultation with our experts and discover how our services can help you achieve your business goals.</p>
+            <a href="contact.html" class="btn" style="background-color: white; color: #3498db; margin-top: 20px;">Schedule Consultation</a>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <h2>Frequently Asked Questions</h2>
+            
+            <div class="faq-item">
+                <div class="faq-question">How do your consulting services work?</div>
+                <div class="faq-answer">
+                    <p>Our consulting services begin with a thorough assessment of your business, followed by strategy development, implementation support, and ongoing evaluation. We work closely with your team throughout the process to ensure optimal results.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">Can your services be customized for my specific industry?</div>
+                <div class="faq-answer">
+                    <p>Absolutely! We specialize in creating tailored solutions for businesses across various industries. Our team has expertise in multiple sectors and will customize our approach to address your specific industry challenges and opportunities.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">How long does it take to see results from your services?</div>
+                <div class="faq-answer">
+                    <p>The timeline for results varies depending on the service and your specific goals. Some improvements, such as operational efficiencies, may be noticeable within weeks, while others, like significant market growth, may take several months. We'll provide realistic timelines during our initial consultation.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">Do you offer one-time services or only ongoing packages?</div>
+                <div class="faq-answer">
+                    <p>We offer both one-time project-based services and ongoing service packages. Our team can work with you to determine the best approach based on your needs, goals, and budget.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">How do you measure the success of your services?</div>
+                <div class="faq-answer">
+                    <p>We establish clear, measurable KPIs at the beginning of our engagement that align with your business objectives. We provide regular reports and analytics to track progress and demonstrate ROI. Our focus is on delivering tangible results that impact your bottom line.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Business Name</h3>
+                    <p>123 Business Street<br>City, State 12345<br>Phone: (123) 456-7890<br>Email: info@business.com</p>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="home.html">Home</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="team.html">Our Team</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Services</h3>
+                    <ul>
+                        <li><a href="#consulting">Strategic Consulting</a></li>
+                        <li><a href="#marketing">Digital Marketing</a></li>
+                        <li><a href="#financial">Financial Planning</a></li>
+                        <li><a href="#technology">Technology Solutions</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Newsletter</h3>
+                    <p>Subscribe to our newsletter for the latest updates and insights.</p>
+                    <form>
+                        <input type="email" placeholder="Enter your email" style="width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 4px; border: none;">
+                        <button type="submit" class="btn" style="width: 100%; background-color: #2980b9;">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="social-links">
+                <a href="#">F</a>
+                <a href="#">T</a>
+                <a href="#">I</a>
+                <a href="#">L</a>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 Business Name. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <script>
+        // script.js
+
+// Function to handle page transitions
+function transitionToPage(url) {
+    // Create a fade-out effect
+    document.body.classList.add('fade-out');
+
+    // Wait for the fade-out transition to complete before navigating
+    setTimeout(() => {
+        window.location.href = url;
+    }, 300); // Match this duration with the CSS transition duration
+}
+
+// Add event listeners to all links
+document.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', (e) => {
+        e.preventDefault(); // Prevent default link behavior
+        const url = link.getAttribute('href'); // Get the URL from the link
+        transitionToPage(url); // Call the transition function
+    });
+});
+    </script>
+</body>
+</html>

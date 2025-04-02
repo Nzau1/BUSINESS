@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Search through our comprehensive business services to find exactly what you need.">
+    <title>Service Search | Business Name</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            line-height: 1.6;
+            color: #333;
+            transition: background-color 0.3s; /* Smooth background transition */
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            background-color: #2c3e50;
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            z-index: 100;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .logo {
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s, transform 0.3s; /* Added transform for hover effect */
+        }
+        
+        .nav-links a:hover {
+            color: #3498db;
+            transform: scale(1.05); /* Slightly enlarge on hover */
+        }
+        
+        /* Search Bar */
+        .search-container {
+            position: relative;
+            margin-left: 20px;
+        }
+        
+        .search-toggle {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            padding: 5px;
+            transition: color 0.3s;
+        }
+        
+        .search-toggle:hover {
+            color: #3498db;
+        }
+        
+        .search-bar {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            width: 300px;
+            padding: 15px;
+            background-color: white;
+            border-radius: 4px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            display: none;
+            z-index: 101;
+            margin-top: 10px;
+        }
+        
+        .search-bar.active {
+            display: block;
+        }
+        
+        .search-form {
+            display: flex;
+        }
+        
+        .search-input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px 0 0 4px;
+            font-size: 16px;
+            transition: border-color 0.3s; /* Transition for border color */
+        }
+        
+        .search-input:focus {
+            border-color: #3498db; /* Change border color on focus */
+            outline: none; /* Remove default outline */
+        }
+        
+        .search-submit {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 0 15px;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s; /* Added transform for hover effect */
+        }
+        
+        .search-submit:hover {
+            background-color: #2980b9;
+            transform: scale(1.05); /* Slightly enlarge on hover */
+        }
+        
+        /* Full Page Search */
+        .search-page {
+            padding-top: 100px;
+            min-height: 100vh;
+        }
+        
+        .search-header {
+            margin-bottom: 40px;
+            text-align: center;
+        }
+        
+        .search-page-form {
+            max-width: 600px;
+            margin: 0 auto 40px;
+            display: flex;
+        }
+        
+        .search-page-input {
+            flex: 1;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 4px 0 0 4px;
+            font-size: 18px;
+            transition: border-color 0.3s; /* Transition for border color */
+        }
+        
+        .search-page-input:focus {
+            border-color: #3498db; /* Change border color on focus */
+            outline: none; /* Remove default outline */
+        }
+        
+        .search-page-submit {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 0 25px;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background-color 0.3s, transform 0.3s; /* Added transform for hover effect */
+        }
+        
+        .search-page-submit:hover {
+            background-color: #2980b9;
+            transform: scale(1.05); /* Slightly enlarge on hover */
+        }
+        
+        .search-results {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .result-item {
+            margin-bottom: 30px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid #eee;
+            transition: transform 0.3s; /* Transition for result item */
+        }
+        
+        .result-item:hover {
+            transform: translateY(-5px); /* Slightly lift on hover */
+        }
+        
+        .result-item:last-child {
+            border-bottom: none;
+        }
+        
+        .result-title {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+        
+        .result-title a {
+            text-decoration: none;
+            color: #2c3e50;
+            transition: color 0.3s; /* Transition for link color */
+        }
+        
+        .result-title a:hover {
+            color: #3498db;
+        }
+        
+        .result-snippet {
+            margin-bottom: 15px;
+        }
+        
+        .result-link {
+            color: #7f8c8d;
+            font-size: 14px;
+        }
+        
+        .highlight {
+            background-color: #ffffa0;
+            padding: 2px;
+        }
+        
+        .search-filters {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .filter-btn {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            padding: 8px 15px;
+            margin: 0 5px 10px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s; /* Transition for filter button */
+        }
+        
+        .filter-btn:hover, .filter-btn.active {
+            background-color: #3498db;
+            color: white;
+            border-color: #3498db;
+        }
+        
+        .no-results {
+            text-align: center;
+            margin-top: 40px;
+            color: #7f8c8d;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            text-align: left;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: #3498db;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column a {
+            color: #ecf0f1;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column a:hover {
+            color: #3498db;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .search-container {
+                margin-left: auto;
+            }
+            
+            .search-bar {
+                width: 100%;
+                right: -20px;
+            }
+            
+            .search-page-form {
+                flex-direction: column;
+            }
+            
+            .search-page-input, .search-page-submit {
+                width: 100%;
+                border-radius: 4px;
+            }
+            
+            .search-page-submit {
+                margin-top: 10px;
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <a href="home.html" class="logo">Business Name</a>
+                <ul class="nav-links">
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="team.html">Our Team</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+                <div class="search-container">
+                    <button class="search-toggle" onclick="toggleSearch()">🔍</button>
+                    <div class="search-bar" id="searchBar">
+                        <form class="search-form" action="search.html" method="get">
+                            <input type="text" class="search-input" name="q" placeholder="Search our services...">
+                            <button type="submit" class="search-submit">Search</button>
+                        </form>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section class="search-page">
+        <div class="container">
+            <div class="search-header">
+                <h1>Search Our Services</h1>
+                <p>Find the specific business solutions you need</p>
+            </div>
+            
+            <form class="search-page-form" id="mainSearchForm">
+                <input type="text" class="search-page-input" id="searchQuery" placeholder="Enter keywords like 'marketing', 'finance', 'consulting'..." value="">
+                <button type="submit" class="search-page-submit">Search</button>
+            </form>
+            
+            <div class="search-filters">
+                <button class="filter-btn active" data-filter="all">All Services</button>
+                <button class="filter-btn" data-filter="consulting">Consulting</button>
+                <button class="filter-btn" data-filter="marketing">Marketing</button>
+                <button class="filter-btn" data-filter="financial">Financial</button>
+                <button class="filter-btn" data-filter="technology">Technology</button>
+            </div>
+            
+            <div class="search-results" id="searchResults">
+                <!-- Results will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Business Name</h3>
+                    <p>123 Business Street<br>City, State 12345<br>Phone: (123) 456-7890<br>Email: info@business.com</p>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="home.html">Home</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="team.html">Our Team</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Services</h3>
+                    <ul>
+                        <li><a href="services.html#consulting">Strategic Consulting</a></li>
+                        <li><a href="services.html#marketing">Digital Marketing</a></li>
+                        <li><a href="services.html#financial">Financial Planning</a></li>
+                        <li><a href="services.html#technology">Technology Solutions</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Newsletter</h3>
+                    <p>Subscribe to our newsletter for the latest updates and insights.</p>
+                    <form>
+                        <input type="email" placeholder="Enter your email" style="width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 4px; border: none;">
+                        <button type="submit" class="btn" style="width: 100%; background-color: #2980b9; color: white; border: none; padding: 10px; border-radius: 4px; cursor: pointer;">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 Business Name. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Sample service data (in a real implementation, this would come from a database)
+        const servicesData = [
+            {
+                id: 1,
+                title: "Strategic Business Consulting",
+                category: "consulting",
+                description: "Comprehensive business analysis and strategy development to help your organization achieve sustainable growth and competitive advantage.",
+                keywords: ["business analysis", "strategy", "growth", "competitive advantage", "consulting"],
+                link: "services.html#consulting"
+            },
+            {
+                id: 2,
+                title: "Market Research & Analysis",
+                category: "consulting",
+                description: "In-depth market research to identify trends, opportunities, and customer insights to inform your business decisions.",
+                keywords: ["market research", "trends", "customer insights", "market analysis", "opportunities"],
+                link: "services.html#consulting"
+            },
+            {
+                id: 3,
+                title: "Search Engine Optimization (SEO)",
+                category: "marketing",
+                description: "Improve your website's visibility in search engines with our comprehensive SEO services designed to drive organic traffic.",
+                keywords: ["SEO", "search engine", "organic traffic", "keywords", "ranking"],
+                link: "services.html#marketing"
+            },
+            {
+                id: 4,
+                title: "Social Media Marketing",
+                category: "marketing",
+                description: "Engage with your audience and build brand awareness through strategic social media marketing campaigns across multiple platforms.",
+                keywords: ["social media", "brand awareness", "engagement", "Facebook", "Instagram", "Twitter", "LinkedIn"],
+                link: "services.html#marketing"
+            },
+            {
+                id: 5,
+                title: "Content Marketing",
+                category: "marketing",
+                description: "Create valuable, relevant content that attracts and engages your target audience while establishing your brand as an industry authority.",
+                keywords: ["content", "blogs", "articles", "authority", "engagement", "storytelling"],
+                link: "services.html#marketing"
+            },
+            {
+                id: 6,
+                title: "Financial Planning & Analysis",
+                category: "financial",
+                description: "Comprehensive financial planning services to optimize your business finances and support long-term growth objectives.",
+                keywords: ["financial planning", "analysis", "budget", "forecast", "investment"],
+                link: "services.html#financial"
+            },
+            {
+                id: 7,
+                title: "Cash Flow Management",
+                category: "financial",
+                description: "Optimize your cash flow with expert management strategies to ensure your business maintains liquidity and financial stability.",
+                keywords: ["cash flow", "liquidity", "financial stability", "management", "forecasting"],
+                link: "services.html#financial"
+            },
+            {
+                id: 8,
+                title: "Tax Planning & Strategy",
+                category: "financial",
+                description: "Minimize tax liability and ensure compliance with strategic tax planning services tailored to your business needs.",
+                keywords: ["tax planning", "tax strategy", "compliance", "liability", "optimization"],
+                link: "services.html#financial"
+            },
+            {
+                id: 9,
+                title: "Digital Transformation",
+                category: "technology",
+                description: "Transform your business operations with strategic technology implementation to improve efficiency and competitive advantage.",
+                keywords: ["digital transformation", "technology implementation", "efficiency", "operations", "innovation"],
+                link: "services.html#technology"
+            },
+            {
+                id: 10,
+                title: "Cloud Computing Solutions",
+                category: "technology",
+                description: "Leverage cloud technology to enhance flexibility, scalability, and security while reducing IT infrastructure costs.",
+                keywords: ["cloud computing", "scalability", "security", "flexibility", "infrastructure"],
+                link: "services.html#technology"
+            },
+            {
+                id: 11,
+                title: "Data Analytics & Business Intelligence",
+                category: "technology",
+                description: "Turn your data into actionable insights with advanced analytics and business intelligence solutions.",
+                keywords: ["data analytics", "business intelligence", "insights", "data-driven", "decision making"],
+                link: "services.html#technology"
+            }
+        ];
+
+        // Toggle search bar visibility
+        function toggleSearch() {
+            const searchBar = document.getElementById('searchBar');
+            searchBar.classList.toggle('active');
+        }
+
+        // Get query parameter from URL
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+
+        // Highlight matching text in search results
+        function highlightText(text, query) {
+            if (!query) return text;
+            
+            const regex = new RegExp(`(${query})`, 'gi');
+            return text.replace(regex, '<span class="highlight">$1</span>');
+        }
+
+        // Perform search and display results
+        function performSearch(query, filter = 'all') {
+            const searchResults = document.getElementById('searchResults');
+            searchResults.innerHTML = '';
+            
+            // If no query and not filtering, show all services
+            if (!query && filter === 'all') {
+                showAllServices();
+                return;
+            }
+            
+            // Convert query to lowercase for case-insensitive matching
+            query = query ? query.toLowerCase() : '';
+            
+            // Filter services based on search query and category filter
+            let results = servicesData.filter(service => {
+                const matchesFilter = filter === 'all' || service.category === filter;
+                
+                if (!query) return matchesFilter;
+                
+                // Check if query matches title, description or keywords
+                const titleMatch = service.title.toLowerCase().includes(query);
+                const descMatch = service.description.toLowerCase().includes(query);
+                const keywordMatch = service.keywords.some(keyword => 
+                    keyword.toLowerCase().includes(query)
+                );
+                
+                return matchesFilter && (titleMatch || descMatch || keywordMatch);
+            });
+            
+            // Display results or no results message
+            if (results.length > 0) {
+                results.forEach(result => {
+                    const resultItem = document.createElement('div');
+                    resultItem.className = 'result-item';
+                    
+                    resultItem.innerHTML = `
+                        <h3 class="result-title"><a href="${result.link}">${highlightText(result.title, query)}</a></h3>
+                        <p class="result-snippet">${highlightText(result.description, query)}</p>
+                        <p class="result-link">${result.link}</p>
+                    `;
+                    
+                    searchResults.appendChild(resultItem);
+                });
+            } else {
+                searchResults.innerHTML = `
+                    <div class="no-results">
+                        <h3>No results found</h3>
+                        <p>Try different keywords or browse our service categories</p>
+                    </div>
+                `;
+            }
+        }
+
+        // Show all services when no search is performed
+        function showAllServices() {
+            const searchResults = document.getElementById('searchResults');
+            searchResults.innerHTML = '';
+            
+            // Group services by category
+            const categories = {
+                consulting: { title: "Consulting Services", items: [] },
+                marketing: { title: "Marketing Services", items: [] },
+                financial: { title: "Financial Services", items: [] },
+                technology: { title: "Technology Services", items: [] }
+            };
+            
+            servicesData.forEach(service => {
+                categories[service.category].items.push(service);
+            });
+            
+            // Display services by category
+            for (const category in categories) {
+                const categoryDiv = document.createElement('div');
+                categoryDiv.className = 'result-category';
+                
+                categoryDiv.innerHTML = `<h2 style="margin: 30px 0 20px;">${categories[category].title}</h2>`;
+                
+                categories[category].items.forEach(service => {
+                    const serviceItem = document.createElement('div');
+                    serviceItem.className = 'result-item';
+                    
+                    serviceItem.innerHTML = `
+                        <h3 class="result-title"><a href="${service.link}">${service.title}</a></h3>
+                        <p class="result-snippet">${service.description}</p>
+                        <p class="result-link">${service.link}</p>
+                    `;
+                    
+                    categoryDiv.appendChild(serviceItem);
+                });
+                
+                searchResults.appendChild(categoryDiv);
+            }
+        }
+
+        // Initialize page when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            const query = getQueryParam('q');
+            const searchInput = document.getElementById('searchQuery');
+            
+            // Set search input value if query parameter exists
+            if (query) {
+                searchInput.value = query;
+                performSearch(query);
+            } else {
+                showAllServices();
+            }
+            
+            // Set up search form submission
+            const searchForm = document.getElementById('mainSearchForm');
+            searchForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const query = searchInput.value.trim();
+                
+                // Update URL with search query
+                const url = new URL(window.location);
+                if (query) {
+                    url.searchParams.set('q', query);
+                } else {
+                    url.searchParams.delete('q');
+                }
+                window.history.pushState({}, '', url);
+                
+                // Perform search
+                const activeFilter = document.querySelector('.filter-btn.active');
+                const filter = activeFilter ? activeFilter.dataset.filter : 'all';
+                performSearch(query, filter);
+            });
+            
+            // Set up filter buttons
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Update active state
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Perform filtered search
+                    const filter = this.dataset.filter;
+                    performSearch(searchInput.value.trim(), filter);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
